@@ -1,0 +1,75 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+{% include 'accounts/status.html' %}
+
+<br/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Customers</h5>
+                    <button type="button" class="btn btn-outline-secondary btn-small">Create Customer</button>
+                    <p class="card-text">
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th scope="col">Customers</th>
+                            <th scope="col">Phone</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for customer in customers %}
+                        <tr>
+                            <td><a class="btn btn-sm btn-info" href="{% url 'customer_page' customer.id %}">View</a></td>
+                            <td>{{ customer.name }}</td>
+                            <td>{{ customer.phone }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Last 5 orders</h5>
+                    <p class="card-text">
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Date Ordered</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Update</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>{{ order.product }}</td>
+                            <td>{{ order.date_created }}</td>
+                            <td>{{ order.status }}</td>
+                            <td><a class="btn btn-sm btn-info" href="{% url 'update_order_form' order.id %}">Update</a></td>
+                            <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order_form' order.id %}">Delete</a></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

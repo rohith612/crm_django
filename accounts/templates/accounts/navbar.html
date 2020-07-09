@@ -1,0 +1,41 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="{% url 'home_page' %}"><img src="{% static 'images/logo_new_one.png' %}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home_page' %}">Dashboard</a>
+            </li>
+            {% if request.user.is_staff %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'product_page'%}">Products</a>
+            </li>
+            {% endif %}
+        </ul>
+
+    </div>
+
+
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+        <div class="btn-group btn-group-sm" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                {{ request.user }} <i class="fa fa-user"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                {% if not request.user.is_staff %}
+                <a class="dropdown-item" href="{% url 'user_profile' %}">Profile</a>
+                {% endif %}
+                <a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a>
+            </div>
+        </div>
+    </div>
+
+</nav>
