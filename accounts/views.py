@@ -169,3 +169,8 @@ def delete_order(request, pk):
 
     context = {'item': order}
     return render(request, 'accounts/delete_order.html', context)
+
+
+@login_required(login_url='login_page')
+def user_permissions(request):
+    return HttpResponse('hello world')
